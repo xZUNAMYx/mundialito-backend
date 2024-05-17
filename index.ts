@@ -1,9 +1,12 @@
-// const express = require('express'); 
-require('dotenv').config();
+
+// require('dotenv').config();
+import 'dotenv/config'
 import express from 'express'; //TODO: forma de usar express con typescript 
 
 const cors = require('cors');
+// import cors from 'cors';
 const { dbConection } = require('./database/config'); 
+// import dbConection from './database/config.ts'; 
 
 
 //Crear el servidor de express

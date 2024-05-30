@@ -3,38 +3,35 @@
     /api/questions
 */
 import { Router } from 'express';
-const { getEventos, crearEvento, actualizarEvento, borrarEvento } = require('../controllers/events');
 import { check } from 'express-validator';
-const { validarCampos } = require('../middlewares/validar-campos');
-const { isDate } = require('../helpers/isDate');
+// const { getEventos, crearQuestion, actualizarEvento, borrarEvento } = require('../controllers/events');
+const {crearQuestion, getQuestions } = require('../controllers/questions');
+// const { validarCampos } = require('../middlewares/validar-campos');
 
 const router = Router();
 
-router.use( validarJWT );
-
-//Todas deben pasar por la validacion del JWT
-//Obtener eventos
-router.get('/', validarJWT, getEventos );
+router.get('/', getQuestions );
 
 
 //Crear evento
 router.post(
     '/', 
     [
-        check('title', 'El titulo es obligatorio').not().isEmpty(),
-        check('start', 'La fecha de inicio es obligatorio').custom( isDate ),
-        check('end', 'La fecha de inicio es obligatorio').custom( isDate ),
-        validarCampos
+        check('question', 'La pregunta es obligatoria').not().isEmpty(),
+        check('code', 'El code o tip es obligatorio').not().isEmpty(),
+        check('answers', 'Las opciones de respuesta son obligatorias').not().isEmpty(),
+        check('correctAnswer', 'La respuesta correcta es obligatoria').not().isEmpty(),
+        // validarCampos
     ],
-    crearEvento 
+    crearQuestion 
 );
 
 
 //Actualizar eventos
-router.put('/:id', actualizarEvento );
+// router.put('/:id', actualizarEvento );
 
 
 //Eliminar eventos
-router.delete('/:id', borrarEvento );
+// router.delete('/:id', borrarEvento );
 
 module.exports = router;

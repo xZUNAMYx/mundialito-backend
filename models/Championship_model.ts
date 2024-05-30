@@ -7,8 +7,7 @@ const ChampionshipSchema = new mongoose.Schema({
     },
 
     Teams: {
-        type: [Schema.Types.ObjectId],
-        ref: 'Team',
+        type: [],
         required: true,
     }
 });
